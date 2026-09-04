@@ -26,7 +26,7 @@ body {
     background: var(--black);
     color: var(--white);
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
@@ -96,6 +96,26 @@ body {
     font-size: 11px;
     color: var(--muted);
     letter-spacing: 0.1em;
+}
+.prototype-badge {
+    position: fixed;
+    bottom: 16px;
+    left: 16px;
+    z-index: 200;
+    background: rgba(10,10,10,0.85);
+    color: var(--yellow);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: 1px solid rgba(255,214,0,0.3);
+    border-radius: 4px;
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+}
+@media (max-width: 640px) {
+    .prototype-badge { font-size: 9px; padding: 6px 10px; bottom: 12px; left: 12px; }
 }
 
 /* ═══════════════════════════════════════════════════════
