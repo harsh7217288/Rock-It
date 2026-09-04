@@ -25,6 +25,7 @@ const animationContainer = document.getElementById('animationContainer');
 const mainNav           = document.getElementById('mainNav');
 
 const FRAME_COUNT = 241;
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
 const images      = [];
 let loadedCount   = 0;
 let currentFrame  = 0;
@@ -81,12 +82,27 @@ function getFrameName(i) {
 }
 
 function preloadImages() {
+    if (isMobile) {
+        const img = new Image();
+        img.src = getFrameName(FRAME_COUNT);
+        images[FRAME_COUNT - 1] = img;
+        img.onload = () => {
+            currentFrame = FRAME_COUNT - 1;
+            resizeCanvas();
+            canvas.classList.add('loaded');
+            renderFrame(currentFrame);
+            updateLoader(100);
+            hideLoader();
+        };
+        img.onerror = img.onload;
+        return;
+    }
     for (let i = 1; i <= FRAME_COUNT; i++) {
         const img = new Image();
-        img.src   = getFrameName(i);
+        img.src = getFrameName(i);
         images.push(img);
-        img.onload  = onImageLoaded;
-        img.onerror = onImageLoaded; // count errors so loader doesn't freeze
+        img.onload = onImageLoaded;
+        img.onerror = onImageLoaded;
     }
 }
 
@@ -110,6 +126,7 @@ function renderFrame(idx) {
    SCROLL
 ───────────────────────────────────────────────────── */
 window.addEventListener('scroll', () => {
+     if (isMobile) return; // no scroll-jack frame animation on mobile
     const rect             = animationContainer.getBoundingClientRect();
     const scrollable       = rect.height - window.innerHeight;
     const scrolled         = -rect.top;
