@@ -83,18 +83,8 @@ function getFrameName(i) {
 
 function preloadImages() {
     if (isMobile) {
-        const img = new Image();
-        img.src = getFrameName(FRAME_COUNT);
-        images[FRAME_COUNT - 1] = img;
-        img.onload = () => {
-            currentFrame = FRAME_COUNT - 1;
-            resizeCanvas();
-            canvas.classList.add('loaded');
-            renderFrame(currentFrame);
-            updateLoader(100);
-            hideLoader();
-        };
-        img.onerror = img.onload;
+        updateLoader(100);
+        hideLoader();
         return;
     }
     for (let i = 1; i <= FRAME_COUNT; i++) {
@@ -105,7 +95,6 @@ function preloadImages() {
         img.onerror = onImageLoaded;
     }
 }
-
 function drawCover(img) {
     if (!img || !img.complete || img.naturalWidth === 0) return;
     const hR = canvas.width  / img.naturalWidth;
