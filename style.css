@@ -1399,6 +1399,16 @@ body {
     .footer-bottom { padding: 16px 24px; }
     .hero-overlay { padding: 0 24px 60px; }
 }
+
+/* 👇 ADD YOUR NEW BLOCK RIGHT HERE 👇 */
+@media (max-width: 768px) {
+    .animation-container {
+        height: 100vh;
+    }
+    .sticky-canvas-container {
+        position: relative;
+    }
+}
 @media (max-width: 640px) {
     .hardware-grid { grid-template-columns: 1fr 1fr; }
     .story-meta { flex-direction: column; gap: 16px; }
